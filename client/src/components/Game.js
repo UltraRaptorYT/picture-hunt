@@ -26,8 +26,8 @@ import config from "../config";
 //DRAW 4 WILD - 600
 
 let socket;
-const ENDPOINT = "http://localhost:5000";
-// const ENDPOINT = 'https://uno-online-multiplayer.herokuapp.com/'
+// const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = 'https://picture-test.herokuapp.com/'
 
 function importAll(r) {
   let images = {};
