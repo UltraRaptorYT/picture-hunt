@@ -62,17 +62,17 @@ const Game = (props) => {
       socket.off();
     };
   }, []);
-  // document.addEventListener("keydown", (e) => {
-  //   [...document.getElementsByClassName("tile__inner")].map((value, index) => {
-  //     if (
-  //       value
-  //         .getElementsByClassName("tile__face--front")[0]
-  //         .getElementsByTagName("h2")[0].innerHTML == e.key.toUpperCase()
-  //     ) {
-  //       flipCard(document.getElementsByClassName("tile__inner")[index], index);
-  //     }
-  //   });
-  // });
+  document.addEventListener("keydown", (e) => {
+    [...document.getElementsByClassName("tile__inner")].map((value, index) => {
+      if (
+        value
+          .getElementsByClassName("tile__face--front")[0]
+          .getElementsByTagName("h2")[0].innerHTML == e.key.toUpperCase()
+      ) {
+        flipCard(document.getElementsByClassName("tile__inner")[index], index);
+      }
+    });
+  });
   //initialize game state
   const [gameOver, setGameOver] = useState(true);
   const [turn, setTurn] = useState("");
@@ -120,6 +120,7 @@ const Game = (props) => {
       }) => {
         setGameOver(gameOver);
         setTurn(turn);
+        localStorage.setItem("turn", turn);
         setPlayer1Conveyor(player1Conveyor);
         setPlayer2Conveyor(player2Conveyor);
         setShuffle(shuffle);
@@ -143,6 +144,7 @@ const Game = (props) => {
         cardFlip,
       }) => {
         gameOver && setGameOver(gameOver);
+        turn && localStorage.setItem("turn", turn);
         turn && setTurn(turn);
         player1Conveyor && setPlayer1Conveyor(player1Conveyor);
         player2Conveyor && setPlayer2Conveyor(player2Conveyor);
@@ -227,6 +229,9 @@ const Game = (props) => {
 
   const flipCard = (card, index) => {
     const currentTurn = turn;
+    if (currentTurn === undefined) {
+      currentTurn = localStorage.getItem("turn");
+    }
     var nextCard, position, currentConveyor, nextTurn;
     if (currentTurn === "Player 1") {
       nextCard = player1Conveyor[player1Position - 1].split("|");
