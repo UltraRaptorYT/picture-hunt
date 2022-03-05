@@ -1066,9 +1066,6 @@ const Game = (props) => {
                                   )}
                                   <img
                                     src={images[src]["default"]}
-                                    alt={
-                                      value.split("|")[0] + value.split("|")[2]
-                                    }
                                     className="img-fluid"
                                     style={{
                                       filter: value.split("|")[1],
