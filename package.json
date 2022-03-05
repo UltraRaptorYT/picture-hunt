@@ -1,5 +1,5 @@
 {
-  "name": "uno-online",
+  "name": "picture-hunt",
   "version": "1.0.0",
   "description": "Online multiplayer card game",
   "main": "server.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mizanxali/uno-online.git"
+    "url": "git+https://github.com/UltraRaptorYT/picture-hunt.git"
   },
   "author": "Mizan Ali",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mizanxali/uno-online/issues"
+    "url": "https://github.com/UltraRaptorYT/picture-hunt/issues"
   },
-  "homepage": "https://github.com/mizanxali/uno-online#readme",
+  "homepage": "https://github.com/UltraRaptorYT/picture-hunt#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
