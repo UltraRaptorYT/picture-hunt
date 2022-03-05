@@ -18,7 +18,7 @@ import config from "../config";
 
 let socket;
 // const ENDPOINT = "http://localhost:5000";
-const ENDPOINT = "https://picture-test.herokuapp.com/";
+const ENDPOINT = "https://picture-hunt.herokuapp.com/";
 
 function importAll(r) {
   let images = {};
