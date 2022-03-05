@@ -1076,7 +1076,9 @@ const Game = (props) => {
                                       aspectRatio: 1,
                                     }}
                                     alt={
-                                      value.split("|")[0] + value.split("|")[2]
+                                      value.split("|")[0] +
+                                      "|" +
+                                      value.split("|")[2]
                                     }
                                   />
                                 </div>
