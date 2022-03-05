@@ -14,11 +14,12 @@ const Homepage = () => {
           className="img-fluid"
           id="logo"
         />
-        <div>
-          <div>
+        <div className="d-flex align-items-center justify-content-between w-50">
+          <div className="d-flex flex-column">
             <input
               type="text"
               placeholder="Game Code"
+              className="form-control"
               onInput={(event) => setRoomCode(event.target.value)}
             />
             <Link to={`/play?roomCode=${roomCode}`}>
@@ -39,7 +40,9 @@ const Homepage = () => {
           </div>
           <h1>OR</h1>
           <div>
-            <Link to={`/play?roomCode=${randomCodeGenerator(config.codeLength)}`}>
+            <Link
+              to={`/play?roomCode=${randomCodeGenerator(config.codeLength)}`}
+            >
               <button
                 className="bubbly-button"
                 onClick={(e) => {

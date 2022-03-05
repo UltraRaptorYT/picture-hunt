@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from "react";
-import PACK_OF_CARDS from "../utils/packOfCards";
 import shuffleArray from "../utils/shuffleArray";
 import io from "socket.io-client";
 import queryString from "query-string";
-import Spinner from "./Spinner";
 import useSound from "use-sound";
 
-import bgMusic from "../assets/sounds/game-bg-music.mp3";
-import unoSound from "../assets/sounds/uno-sound.mp3";
-import shufflingSound from "../assets/sounds/shuffling-cards-1.mp3";
-import skipCardSound from "../assets/sounds/skip-sound.mp3";
-import draw2CardSound from "../assets/sounds/draw2-sound.mp3";
-import wildCardSound from "../assets/sounds/wild-sound.mp3";
-import draw4CardSound from "../assets/sounds/draw4-sound.mp3";
-import gameOverSound from "../assets/sounds/game-over-sound.mp3";
+import Spinner from "./Spinner";
 import conveyor from "../utils/conveyor";
 import cardColor from "../utils/cardColor";
 import cardLetter from "../utils/cardLetter";
@@ -27,7 +18,7 @@ import config from "../config";
 
 let socket;
 // const ENDPOINT = "http://localhost:5000";
-const ENDPOINT = 'https://picture-test.herokuapp.com/'
+const ENDPOINT = "https://picture-test.herokuapp.com/";
 
 function importAll(r) {
   let images = {};
@@ -84,7 +75,6 @@ const Game = (props) => {
   // });
   //initialize game state
   const [gameOver, setGameOver] = useState(true);
-  const [winner, setWinner] = useState("");
   const [turn, setTurn] = useState("");
   const [player1Conveyor, setPlayer1Conveyor] = useState([]);
   const [player2Conveyor, setPlayer2Conveyor] = useState([]);
@@ -94,18 +84,6 @@ const Game = (props) => {
   const [player2Position, setPlayer2Position] = useState([]);
   const [cardFlip, setCardFlip] = useState("");
 
-  // const [isChatBoxHidden, setChatBoxHidden] = useState(true);
-  // const [isUnoButtonPressed, setUnoButtonPressed] = useState(false);
-  const [isSoundMuted, setSoundMuted] = useState(false);
-  const [isMusicMuted, setMusicMuted] = useState(true);
-  const [playBBgMusic, { pause }] = useSound(bgMusic, { loop: true });
-  // const [playUnoSound] = useSound(unoSound);
-  // const [playShufflingSound] = useSound(shufflingSound);
-  // const [playSkipCardSound] = useSound(skipCardSound);
-  // const [playDraw2CardSound] = useSound(draw2CardSound);
-  // const [playWildCardSound] = useSound(wildCardSound);
-  // const [playDraw4CardSound] = useSound(draw4CardSound);
-  const [playGameOverSound] = useSound(gameOverSound);
   //runs once on component mount
   useEffect(() => {
     const shuffle = shuffleArray(cardColor);
@@ -155,7 +133,6 @@ const Game = (props) => {
       "updateGameState",
       ({
         gameOver,
-        winner,
         turn,
         player1Conveyor,
         player2Conveyor,
@@ -166,8 +143,6 @@ const Game = (props) => {
         cardFlip,
       }) => {
         gameOver && setGameOver(gameOver);
-        gameOver === true && playGameOverSound();
-        winner && setWinner(winner);
         turn && setTurn(turn);
         player1Conveyor && setPlayer1Conveyor(player1Conveyor);
         player2Conveyor && setPlayer2Conveyor(player2Conveyor);
@@ -195,7 +170,7 @@ const Game = (props) => {
     // });
   }, []);
 
-  // //some util functions
+  //some util functions
   const checkWinner = (position, player) => {
     if (position === 0) {
       return player;
@@ -209,9 +184,6 @@ const Game = (props) => {
       return "";
     }
   };
-  // const checkWinner = (arr, player) => {
-  //   return arr.length === 1 ? player : "";
-  // };
 
   // const toggleChatBox = () => {
   //   const chatBody = document.querySelector(".chat-body");
@@ -232,6 +204,7 @@ const Game = (props) => {
   //     });
   //   }
   // };
+
   const flipping = (cardIndex) => {
     if (gameOver === true) {
       [
@@ -342,46 +315,25 @@ const Game = (props) => {
         <>
           <div className="container mb-0 mb-md-2">
             <div className="topInfo mt-lg-3 mt-md-0 mt-3 row justify-content-center align-items-center">
-              {/* <img src={require("../assets/logo.png").default} /> */}
               <h2 className="col-12 col-md-4 text-left text-md-center m-0 m-md-auto">
                 Game Code: {room}
               </h2>
-              {/* <span>
-                <button
-                  className="game-button green"
-                  onClick={() => setSoundMuted(!isSoundMuted)}
-                >
-                  {isSoundMuted ? (
-                    <span className="material-icons">volume_off</span>
-                  ) : (
-                    <span className="material-icons">volume_up</span>
-                  )}
-                </button>
-                <button
-                  className="game-button green"
-                  onClick={() => {
-                    if (isMusicMuted) playBBgMusic();
-                    else pause();
-                    setMusicMuted(!isMusicMuted);
-                  }}
-                >
-                  {isMusicMuted ? (
-                    <span className="material-icons">music_off</span>
-                  ) : (
-                    <span className="material-icons">music_note</span>
-                  )}
-                </button>
-              </span> */}
               {/* PLAYER LEFT MESSAGES */}
               {users.length === 1 && currentUser === "Player 2" && (
-                <h1 className="col-12 topInfoText  m-0 m-md-auto">
-                  Player 1 has left the game.
-                </h1>
+                <div className="col-12 d-flex">
+                  <h1 className="topInfoText  m-0 m-md-auto">
+                    Player 1 has left the game.
+                  </h1>
+                  <Spinner />
+                </div>
               )}
               {users.length === 1 && currentUser === "Player 1" && (
-                <h1 className="col-12 topInfoText  m-0 m-md-auto">
-                  Waiting for Player 2 to join the game.
-                </h1>
+                <div className="col-12 d-flex">
+                  <h1 className="col-12 topInfoText  m-0 m-md-auto">
+                    Waiting for Player 2 to join the game.
+                  </h1>
+                  <Spinner />
+                </div>
               )}
               {/* Turn message */}
               {!gameOver &&
