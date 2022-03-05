@@ -120,7 +120,7 @@ const Game = (props) => {
       }) => {
         setGameOver(gameOver);
         setTurn(turn);
-        localStorage.setItem("turn", turn);
+        sessionStorage.setItem("turn", turn);
         setPlayer1Conveyor(player1Conveyor);
         setPlayer2Conveyor(player2Conveyor);
         setShuffle(shuffle);
@@ -144,7 +144,7 @@ const Game = (props) => {
         cardFlip,
       }) => {
         gameOver && setGameOver(gameOver);
-        turn && localStorage.setItem("turn", turn);
+        turn && sessionStorage.setItem("turn", turn);
         turn && setTurn(turn);
         player1Conveyor && setPlayer1Conveyor(player1Conveyor);
         player2Conveyor && setPlayer2Conveyor(player2Conveyor);
@@ -230,7 +230,7 @@ const Game = (props) => {
   const flipCard = (card, index) => {
     const currentTurn = turn;
     if (currentTurn === undefined) {
-      currentTurn = localStorage.getItem("turn");
+      currentTurn = sessionStorage.getItem("turn");
     }
     var nextCard, position, currentConveyor, nextTurn;
     if (currentTurn === "Player 1") {
