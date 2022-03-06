@@ -21,5 +21,10 @@ while (output.length < config.gridSize ** 2) {
     } while (output.length - 1 != output.indexOf(card));
   }
 }
+var output2 = [];
+for (var i = 0; i < config.gridSize ** 2; i++) {
+  var random = Math.floor(Math.random() * output.length);
+  output2.push(output.splice(random, 1)[0]);
+}
 
-module.exports = output;
+module.exports = output2;
