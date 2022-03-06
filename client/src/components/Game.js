@@ -62,17 +62,17 @@ const Game = (props) => {
       socket.off();
     };
   }, []);
-  document.addEventListener("keydown", (e) => {
-    [...document.getElementsByClassName("tile__inner")].map((value, index) => {
-      if (
-        value
-          .getElementsByClassName("tile__face--front")[0]
-          .getElementsByTagName("h2")[0].innerHTML == e.key.toUpperCase()
-      ) {
-        flipCard(document.getElementsByClassName("tile__inner")[index], index);
-      }
-    });
-  });
+  // document.addEventListener("keydown", (e) => {
+  //   [...document.getElementsByClassName("tile__inner")].map((value, index) => {
+  //     if (
+  //       value
+  //         .getElementsByClassName("tile__face--front")[0]
+  //         .getElementsByTagName("h2")[0].innerHTML == e.key.toUpperCase()
+  //     ) {
+  //       flipCard(document.getElementsByClassName("tile__inner")[index], index);
+  //     }
+  //   });
+  // });
   //initialize game state
   const [gameOver, setGameOver] = useState(true);
   const [turn, setTurn] = useState("");

@@ -8,12 +8,29 @@ const Homepage = () => {
   return (
     <div id="background">
       <div className="d-flex w-100 h-100 align-items-center justify-content-center flex-column">
-        <img
-          src={require("../assets/logo.png").default}
-          width="200px"
-          className="img-fluid"
-          id="logo"
-        />
+        <div
+          style={{ width: "200px" }}
+          className="animate__repeat-1 animate__animated animate__rollIn animate__fadeInLeft position-relative m-5"
+        >
+          <img
+            src={require("../assets/logo.png").default}
+            className="img-fluid p-1"
+            style={{ aspectRatio: 1, background: "white" }}
+            id="logo"
+          />
+          <h1
+            className="position-absolute m-0 text-center"
+            style={{
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%,-50%)",
+            }}
+          >
+            {/* {
+            var text = "Picture Hunt"
+            } */}
+          </h1>
+        </div>
         <div className="d-flex align-items-center justify-content-between w-50">
           <div className="d-flex flex-column">
             <input
