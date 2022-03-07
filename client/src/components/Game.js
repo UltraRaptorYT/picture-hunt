@@ -10,6 +10,8 @@ import cardColor from "../utils/cardColor";
 import cardLetter from "../utils/cardLetter";
 import config from "../config";
 
+import useEventListener from "@use-it/event-listener";
+
 //NUMBER CODES FOR ACTION CARDS
 //SKIP - 404
 //DRAW 2 - 252
@@ -62,17 +64,6 @@ const Game = (props) => {
       socket.off();
     };
   }, []);
-  // document.addEventListener("keydown", (e) => {
-  //   [...document.getElementsByClassName("tile__inner")].map((value, index) => {
-  //     if (
-  //       value
-  //         .getElementsByClassName("tile__face--front")[0]
-  //         .getElementsByTagName("h2")[0].innerHTML == e.key.toUpperCase()
-  //     ) {
-  //       flipCard(document.getElementsByClassName("tile__inner")[index], index);
-  //     }
-  //   });
-  // });
   //initialize game state
   const [gameOver, setGameOver] = useState(true);
   const [turn, setTurn] = useState("");
@@ -84,6 +75,27 @@ const Game = (props) => {
   const [player2Position, setPlayer2Position] = useState([]);
   const [cardFlip, setCardFlip] = useState("");
 
+  var isClicked = false;
+
+  useEventListener("keydown", (e) => {
+    if (isClicked) {
+      return;
+    }
+    isClicked = true;
+    [...document.getElementsByClassName("tile__inner")].map((value, index) => {
+      if (
+        value
+          .getElementsByClassName("tile__face--front")[0]
+          .getElementsByTagName("h2")[0].innerHTML == e.key.toUpperCase()
+      ) {
+        flipCard(document.getElementsByClassName("tile__inner")[index], index);
+      }
+    });
+    setTimeout(function () {
+      isClicked = false;
+    }, 500);
+    return;
+  });
   //runs once on component mount
   useEffect(() => {
     const shuffle = shuffleArray(cardColor);
@@ -120,12 +132,21 @@ const Game = (props) => {
       }) => {
         setGameOver(gameOver);
         setTurn(turn);
+        sessionStorage.setItem("turn", turn);
         setPlayer1Conveyor(player1Conveyor);
         setPlayer2Conveyor(player2Conveyor);
         setShuffle(shuffle);
         setShuffleLetter(shuffleLetter);
         setPlayer1Position(player1Position);
         setPlayer2Position(player2Position);
+        sessionStorage.getItem("user") == "Player 1" &&
+          sessionStorage.setItem("position", player1Position);
+        sessionStorage.getItem("user") == "Player 1" &&
+          sessionStorage.setItem("conveyor", player1Conveyor);
+        sessionStorage.getItem("user") == "Player 2" &&
+          sessionStorage.setItem("position", player2Position);
+        sessionStorage.getItem("user") == "Player 2" &&
+          sessionStorage.setItem("conveyor", player2Conveyor);
       }
     );
 
@@ -143,12 +164,25 @@ const Game = (props) => {
         cardFlip,
       }) => {
         gameOver && setGameOver(gameOver);
+        turn && sessionStorage.setItem("turn", turn);
         turn && setTurn(turn);
         player1Conveyor && setPlayer1Conveyor(player1Conveyor);
+        player1Conveyor &&
+          sessionStorage.getItem("user") == "Player 1" &&
+          sessionStorage.setItem("conveyor", player1Conveyor);
         player2Conveyor && setPlayer2Conveyor(player2Conveyor);
+        player2Conveyor &&
+          sessionStorage.getItem("user") == "Player 2" &&
+          sessionStorage.setItem("conveyor", player2Conveyor);
         shuffle && setShuffle(shuffle);
         shuffleLetter && setShuffleLetter(shuffleLetter);
+        player1Position &&
+          sessionStorage.getItem("user") == "Player 1" &&
+          sessionStorage.setItem("position", player1Position);
         player1Position && setPlayer1Position(player1Position);
+        player2Position &&
+          sessionStorage.getItem("user") == "Player 2" &&
+          sessionStorage.setItem("position", player2Position);
         player2Position && setPlayer2Position(player2Position);
         cardFlip && setCardFlip(cardFlip);
         cardFlip !== "" && flipping(cardFlip);
@@ -161,6 +195,7 @@ const Game = (props) => {
 
     socket.on("currentUserData", ({ name }) => {
       setCurrentUser(name);
+      sessionStorage.setItem("user", name);
     });
 
     // socket.on("message", (message) => {
@@ -227,16 +262,28 @@ const Game = (props) => {
 
   const flipCard = (card, index) => {
     const currentTurn = turn;
+    var user = currentUser;
     var nextCard, position, currentConveyor, nextTurn;
-    if (currentTurn === "Player 1") {
-      nextCard = player1Conveyor[player1Position - 1].split("|");
-      position = player1Position;
-      currentConveyor = [...player1Conveyor];
-    } else if (currentTurn === "Player 2") {
-      nextCard = player2Conveyor[player2Position - 1].split("|");
-      position = player2Position;
-      currentConveyor = [...player2Conveyor];
+    if (currentTurn === undefined || user === undefined) {
+      currentTurn = sessionStorage.getItem("turn");
+      user = sessionStorage.getItem("user");
+      position = parseInt(sessionStorage.getItem("position"));
+      currentConveyor = sessionStorage.getItem("conveyor").split(",");
+    } else {
+      if (user === "Player 1") {
+        position = player1Position;
+        currentConveyor = player1Conveyor;
+      } else if (user === "Player 2") {
+        position = player2Position;
+        currentConveyor = player2Conveyor;
+      } else {
+        return;
+      }
     }
+    if (currentTurn !== user) {
+      return;
+    }
+    nextCard = currentConveyor[position - 1].split("|");
     if (
       nextCard[0] + "|" + nextCard[2] ===
       card
@@ -283,8 +330,12 @@ const Game = (props) => {
     }
     return;
   };
-
+  var isFlipped = false;
   const flip = (e) => {
+    if (isFlipped) {
+      return;
+    }
+    isFlipped = true;
     e.preventDefault();
     var card = undefined;
     if (e.target.tagName !== "DIV") {
@@ -298,6 +349,9 @@ const Game = (props) => {
       }
     });
   };
+  setTimeout(function () {
+    isFlipped = false;
+  }, 500);
   return (
     <div
       className={`Game`}
