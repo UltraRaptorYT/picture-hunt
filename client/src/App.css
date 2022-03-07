@@ -16,6 +16,7 @@ body {
 }
 
 .bubbly-button {
+  white-space: nowrap;
   display: inline-block;
   font-size: 1em;
   padding: 1em 2em;
@@ -29,6 +30,7 @@ body {
   position: relative;
   transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
   box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
+  text-transform: uppercase;
 }
 .bubbly-button:focus {
   outline: 0;
@@ -245,6 +247,9 @@ body {
   #player2 {
     flex-direction: column;
   }
+  .bubbly-button {
+    width: 200px;
+  }
 }
 /* Spinner */
 .loader,
@@ -303,4 +308,9 @@ body {
   40% {
     box-shadow: 0 2.5em 0 0;
   }
+}
+
+#title {
+  font-family: "Dunkin Lyons", sans-serif;
+  font-weight: normal;
 }

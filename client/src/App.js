@@ -1,5 +1,4 @@
 import "./App.css";
-// import "./App1.css";
 import { Route } from "react-router-dom";
 import Homepage from "./components/home";
 import Game from "./components/Game";

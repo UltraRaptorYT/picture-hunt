@@ -64,6 +64,7 @@ const Game = (props) => {
       socket.off();
     };
   }, []);
+
   //initialize game state
   const [gameOver, setGameOver] = useState(true);
   const [turn, setTurn] = useState("");
