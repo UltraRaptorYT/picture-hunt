@@ -15,7 +15,7 @@ const Homepage = () => {
   //   }
   // });
   return (
-    <div id="background">
+    <div id="background" style={{ width: "100vw", height: "100vh" }}>
       <div className="d-flex w-100 h-100 align-items-center justify-content-center flex-column">
         <div
           style={{ width: "200px" }}
