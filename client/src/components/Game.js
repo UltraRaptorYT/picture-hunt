@@ -379,7 +379,7 @@ const Game = (props) => {
                   <h1 className="topInfoText  m-0 m-md-auto">
                     Player 1 has left the game.
                   </h1>
-                  <Spinner />
+                  {/* <Spinner /> */}
                 </div>
               )}
               {users.length === 1 && currentUser === "Player 1" && (
@@ -387,7 +387,7 @@ const Game = (props) => {
                   <h1 className="col-12 topInfoText  m-0 m-md-auto">
                     Waiting for Player 2 to join the game.
                   </h1>
-                  <Spinner />
+                  {/* <Spinner /> */}
                 </div>
               )}
               {/* Turn message */}
