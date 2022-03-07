@@ -441,7 +441,9 @@ const Game = (props) => {
                   {gameOver !== "" && (
                     <>
                       <h1>GAME OVER</h1>
-                      <h2>{gameOver} wins!</h2>
+                      <h2 className="text-center">
+                        {gameOver == currentUser ? "You win!" : "You lose."}
+                      </h2>
                     </>
                   )}
                 </div>
