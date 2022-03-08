@@ -364,7 +364,7 @@ const Game = (props) => {
       {!roomFull ? (
         <>
           <div className="container mb-0 mb-md-2">
-            <div className="py-3">
+            <div className="py-md-3 py-0">
               <header className="row align-items-center justify-content-between">
                 <h2 className="col-12 col-md-4 text-left text-md-center m-0">
                   Game Code: {room}
@@ -409,7 +409,7 @@ const Game = (props) => {
                   href="/"
                   className="col-12 col-md-4 text-center d-none d-md-inline-block"
                 >
-                  <button className="bubbly-button">QUIT</button>
+                  <button className="bubbly-button quit">QUIT</button>
                 </a>
               </header>
             </div>
@@ -643,7 +643,7 @@ const Game = (props) => {
                             href="/"
                             className="col-12 col-md-4 text-center d-md-none d-inline-block my-3"
                           >
-                            <button className="bubbly-button">QUIT</button>
+                            <button className="bubbly-button quit">QUIT</button>
                           </a>
                         </div>
                         <div className="d-flex col-2 col-md-12  w-100 flex-column  my-2">
@@ -965,7 +965,7 @@ const Game = (props) => {
                             href="/"
                             className="col-12 col-md-4 text-center d-md-none d-inline-block my-3"
                           >
-                            <button className="bubbly-button">QUIT</button>
+                            <button className="bubbly-button quit">QUIT</button>
                           </a>
                         </div>
                         <div className="d-flex col-2 col-md-12 w-100 flex-column  my-2">
@@ -1093,7 +1093,7 @@ const Game = (props) => {
         <>
           <h1>Room full</h1>
           <a href="/">
-            <button className="bubbly-button">QUIT</button>
+            <button className="bubbly-button quit">QUIT</button>
           </a>
         </>
       )}

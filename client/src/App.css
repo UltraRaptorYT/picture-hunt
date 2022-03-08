@@ -2,11 +2,12 @@ body {
   background: var(--background);
   background-repeat: no-repeat;
   background-size: cover;
-}
-#background {
-  /* width: 100vw; */
+  overflow: hidden;
+  width: 100vw;
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
+}
+#background {
   min-height: -webkit-fill-available;
   display: flex;
   align-items: center;
@@ -249,7 +250,7 @@ body {
   #player2 {
     flex-direction: column;
   }
-  .bubbly-button {
+  .bubbly-button:not(.quit) {
     width: 200px;
   }
 }
