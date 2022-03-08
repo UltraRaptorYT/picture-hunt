@@ -9,14 +9,7 @@ import conveyor from "../utils/conveyor";
 import cardColor from "../utils/cardColor";
 import cardLetter from "../utils/cardLetter";
 import config from "../config";
-
 import useEventListener from "@use-it/event-listener";
-
-//NUMBER CODES FOR ACTION CARDS
-//SKIP - 404
-//DRAW 2 - 252
-//WILD - 300
-//DRAW 4 WILD - 600
 
 let socket;
 // const ENDPOINT = "http://localhost:5000";
