@@ -268,7 +268,7 @@ body {
 .loader {
   color: #000000;
   font-size: 5px;
-  margin: 0 50px 0 50px;
+  margin: 25px;
   position: relative;
   text-indent: -9999em;
   -webkit-transform: translateZ(0);
@@ -312,7 +312,6 @@ body {
   }
 }
 
-#title {
-  font-family: "Dunkin Lyons";
-  font-weight: 400;
+header {
+  height: 50px;
 }

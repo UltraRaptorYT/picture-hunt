@@ -205,8 +205,10 @@ const Game = (props) => {
       return player;
     } else if (position >= config.conveyorLength) {
       if (player === "Player 1") {
+        window.location.href = `/gameOver?roomCode=${room}`;
         return "Player 2";
       } else {
+        window.location.href = `/gameOver?roomCode=${room}`;
         return "Player 1";
       }
     } else {
@@ -350,82 +352,76 @@ const Game = (props) => {
     <div
       className={`Game`}
       id="background"
-      style={
-        roomFull || users.length === 1
-          ? { justifyContent: "center" }
-          : (window.innerWidth >= 768 && window.innerWidth < 992) ||
-            window.innerWidth >= 1920
-          ? { justifyContent: "space-around" }
-          : { justifyContent: "start" }
-      }
+      // style={
+      //   roomFull || users.length === 1
+      //     ? { justifyContent: "center" }
+      //     : (window.innerWidth >= 768 && window.innerWidth < 992) ||
+      //       window.innerWidth >= 1920
+      //     ? { justifyContent: "space-around" }
+      //     : { justifyContent: "start" }
+      // }
     >
       {!roomFull ? (
         <>
           <div className="container mb-0 mb-md-2">
-            <div className="topInfo mt-lg-3 mt-md-0 mt-3 row justify-content-center align-items-center">
-              <h2 className="col-12 col-md-4 text-left text-md-center m-0 m-md-auto">
-                Game Code: {room}
-              </h2>
-              {/* PLAYER LEFT MESSAGES */}
-              {users.length === 1 && currentUser === "Player 2" && (
-                <div className="col-12 d-flex">
-                  <h1 className="topInfoText  m-0 m-md-auto">
-                    Player 1 has left the game.
-                  </h1>
-                  {/* <Spinner /> */}
-                </div>
-              )}
-              {users.length === 1 && currentUser === "Player 1" && (
-                <div className="col-12 d-flex">
-                  <h1 className="col-12 topInfoText  m-0 m-md-auto">
-                    Waiting for Player 2 to join the game.
-                  </h1>
-                  {/* <Spinner /> */}
-                </div>
-              )}
-              {/* Turn message */}
-              {!gameOver &&
-                users.length === 2 &&
-                currentUser === "Player 1" &&
-                turn === "Player 2" && (
-                  <h2 className="col-12 col-md-4 topInfoText d-none d-md-block m-0 m-md-auto">
-                    Opponent's Turn
-                  </h2>
-                )}
-              {!gameOver &&
-                users.length === 2 &&
-                currentUser === "Player 2" &&
-                turn === "Player 1" && (
-                  <h2 className="col-12 col-md-4 topInfoText  d-none d-md-block m-0 m-md-auto">
-                    Opponent's Turn
-                  </h2>
-                )}
-              {!gameOver &&
-                users.length === 2 &&
-                currentUser === "Player 1" &&
-                turn === "Player 1" && (
-                  <h2 className="col-12 col-md-4 topInfoText  d-none d-md-block m-0 m-md-auto">
-                    Your Turn
-                  </h2>
-                )}
-              {!gameOver &&
-                users.length === 2 &&
-                currentUser === "Player 2" &&
-                turn === "Player 2" && (
-                  <h2
-                    c
-                    className="col-12 col-md-4 topInfoText  d-none d-md-block m-0 m-md-auto"
-                  >
-                    Your Turn
-                  </h2>
-                )}
-              <a
-                href="/"
-                className="col-12 col-md-4 text-center d-none d-md-inline-block"
-              >
-                <button className="bubbly-button">QUIT</button>
-              </a>
+            <div className="py-3">
+              <header className="row align-items-center justify-content-between">
+                <h2 className="col-12 col-md-4 text-left text-md-center m-0">
+                  Game Code: {room}
+                </h2>
+                {/* Turn message */}
+                {!gameOver &&
+                  users.length === 2 &&
+                  currentUser === "Player 1" &&
+                  turn === "Player 2" && (
+                    <h2 className="col-12 col-md-4 topInfoText d-none d-md-block m-0 m-md-auto">
+                      Opponent's Turn
+                    </h2>
+                  )}
+                {!gameOver &&
+                  users.length === 2 &&
+                  currentUser === "Player 2" &&
+                  turn === "Player 1" && (
+                    <h2 className="col-12 col-md-4 topInfoText  d-none d-md-block m-0 m-md-auto">
+                      Opponent's Turn
+                    </h2>
+                  )}
+                {!gameOver &&
+                  users.length === 2 &&
+                  currentUser === "Player 1" &&
+                  turn === "Player 1" && (
+                    <h2 className="col-12 col-md-4 topInfoText  d-none d-md-block m-0 m-md-auto">
+                      Your Turn
+                    </h2>
+                  )}
+                {!gameOver &&
+                  users.length === 2 &&
+                  currentUser === "Player 2" &&
+                  turn === "Player 2" && (
+                    <h2
+                      c
+                      className="col-12 col-md-4 topInfoText  d-none d-md-block m-0 m-md-auto"
+                    >
+                      Your Turn
+                    </h2>
+                  )}
+                <a
+                  href="/"
+                  className="col-12 col-md-4 text-center d-none d-md-inline-block"
+                >
+                  <button className="bubbly-button">QUIT</button>
+                </a>
+              </header>
             </div>
+            {/* PLAYER LEFT MESSAGES */}
+            {users.length === 1 && (
+              <div className="col-12 d-flex align-items-center justify-content-center">
+                <h1 className="topInfoText  m-0">
+                  Waiting for a Player to join the game
+                </h1>
+                <Spinner />
+              </div>
+            )}
           </div>
           {users.length === 2 && (
             <>
