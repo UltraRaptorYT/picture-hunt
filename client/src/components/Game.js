@@ -205,10 +205,8 @@ const Game = (props) => {
       return player;
     } else if (position >= config.conveyorLength) {
       if (player === "Player 1") {
-        window.location.href = `/gameOver?roomCode=${room}`;
         return "Player 2";
       } else {
-        window.location.href = `/gameOver?roomCode=${room}`;
         return "Player 1";
       }
     } else {
