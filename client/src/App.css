@@ -316,3 +316,7 @@ body {
 header {
   height: 50px;
 }
+
+.carousel-item {
+  padding: 25px;
+}

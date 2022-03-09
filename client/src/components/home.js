@@ -71,7 +71,7 @@ const Homepage = () => {
                   data-touch="false"
                   data-interval="false"
                 >
-                  <div className="carousel-inner w-75 mx-auto">
+                  <div className="carousel-inner mx-auto">
                     <div className="carousel-item active">hi</div>
                     <div className="carousel-item">hi</div>
                     <div className="carousel-item">hi</div>
