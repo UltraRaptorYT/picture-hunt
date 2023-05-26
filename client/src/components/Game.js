@@ -12,8 +12,8 @@ import config from "../config";
 import useEventListener from "@use-it/event-listener";
 
 let socket;
-const ENDPOINT = "http://localhost:5000";
-// const ENDPOINT = "https://picture-hunt.herokuapp.com/";
+// const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = "https://picturehunt-server.onrender.com";
 
 function importAll(r) {
   let images = {};

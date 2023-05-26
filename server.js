@@ -63,14 +63,18 @@ io.on("connection", (socket) => {
   });
 });
 
-//serve static assets in production
-if (process.env.NODE_ENV === "production") {
-  //set static folder
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
+// //serve static assets in production
+// if (process.env.NODE_ENV === "production") {
+//   //set static folder
+//   app.use(express.static("client/public"));
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "client", "public", "index.html"));
+//   });
+// }
+
+app.get("/test", (req, res) => {
+  return res.send(`Work`)
+})
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
